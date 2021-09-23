@@ -1,11 +1,65 @@
-// I should be able to filter the list of available rooms by their roomType property
+
+let dayjs = require('dayjs')
+// let today = new Date();
+// let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
 
 class BookingRepo {
   constructor(bookingData) {
-    this.bookingRepo = bookingData
+    this.bookingRepo = bookingData.bookings
+    this.allCustomerBookings = []
+    this.pastCustomerBookings = []
+    this.currentCustomerBookings = []
+    this.futureCustomerBookings = []
     this.availableRooms = [];
     this.guestChoices = []
   }
+
+  getOnlyCustomer(customerID, rooms) {
+   let customerBooked = this.bookingRepo.filter(booking => {
+      return booking.userID === customerID
+    })
+
+   customerBooked.map(booking => {
+      rooms.forEach(room => {
+        if(booking.roomNumber === room.number) {
+          let combine = Object.assign(booking, room)
+          delete combine.number
+          // console.log(combine)
+          this.allCustomerBookings.push(combine)
+        }
+      })
+    })
+   return this.allCustomerBookings
+  }
+
+  getPastBookings(todaysDate) {
+    this.allCustomerBookings.forEach(booking => {
+      if(dayjs(booking.date).isBefore(dayjs(todaysDate))) {
+        this.pastCustomerBookings.push(booking)
+      }
+    })
+   return this.pastCustomerBookings
+  }
+
+  getCurrentBookings(todaysDate) {
+    this.allCustomerBookings.forEach(booking => {
+      if(todaysDate === booking.date) {
+        this.currentCustomerBookings.push(booking)
+      }
+    })
+   return this.currentCustomerBookings
+  }
+
+  getFutureBookings(todaysDate) {
+    this.allCustomerBookings.forEach(booking => {
+      if(dayjs(booking.date).isAfter(dayjs(todaysDate))) {
+        this.futureCustomerBookings.push(booking)
+      }
+    })
+   return this.futureCustomerBookings
+  }
+
+
 
   findTotalSpent(customerID, roomData) { 
     let totalCost = 0
@@ -52,11 +106,8 @@ class BookingRepo {
         }
       })
     })
-    
     return this.guestChoices
   }
-  
-
 
 }
   

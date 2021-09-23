@@ -1,5 +1,6 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
 
 .banner {
   display: flex;
@@ -76,4 +77,24 @@ main {
 
 .hidden {
   display: none;
+}
+
+.booking-container {
+  border: solid green 5px;
+  @include takeUpSpace();
+}
+
+.past-container {
+  border: solid pink 5px;
+  @include takeUpSpace();
+}
+
+.current-container {
+  border: solid orange 5px;
+  @include takeUpSpace();
+}
+
+.future-container {
+  border: solid purple 5px;
+  @include takeUpSpace();
 }
