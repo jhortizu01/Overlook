@@ -38,7 +38,9 @@ class BookingRepo {
         this.pastCustomerBookings.push(booking)
       }
     })
-   return this.pastCustomerBookings
+
+   let order = this.pastCustomerBookings.sort((a, b) => new Date(b.date) - new Date(a.date)) 
+
   }
 
   getCurrentBookings(todaysDate) {
@@ -58,8 +60,6 @@ class BookingRepo {
     })
    return this.futureCustomerBookings
   }
-
-
 
   findTotalSpent(customerID, roomData) { 
     let totalCost = 0

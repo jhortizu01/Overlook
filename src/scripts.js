@@ -8,6 +8,8 @@ import Customer from './classes/customer.js'
 import BookingRepo from './classes/bookingRepo.js'
 import { fetchCustomers, fetchRooms, fetchBookings } from './apiCalls';
 import dom from './dom.js'
+import blueRoom from './images/blueroom.jpg'
+
 
 export let dayjs = require('dayjs')
 export let homeBtn = document.getElementById('home')
@@ -20,9 +22,12 @@ export let bookingContainer = document.getElementById('bookingContainer')
 export let pastContainer = document.getElementById('pastContainer')
 export let currentContainer = document.getElementById('currentContainer')
 export let futureContainer = document.getElementById('futureContainer')
+export let welcome = document.getElementById('welcome')
+export let totalSpent = document.getElementById('totalSpent')
 
-let customerID = 21
-export let customer, rooms, bookings
+let customerID = 6
+export let customer, rooms, bookings 
+
 
 window.addEventListener('load', (e) => {
   fetchData()
@@ -52,5 +57,6 @@ const instantiateClass = (customerData, roomData, bookingsData) => {
   customer = new Customer(customerData)
   rooms = new Rooms(roomData)
   bookings = new BookingRepo(bookingsData)
+  dom.displayName()
+  dom.displayTotalSpent()
 }
-
