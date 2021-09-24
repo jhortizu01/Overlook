@@ -76,33 +76,44 @@ main {
 
 
 .hidden {
-  display: none;
+  display: none !important;;
 }
 
 .booking-container {
   border: solid green 5px;
   @include takeUpSpace();
+  @include flexStyle();
 }
 
 .past-container {
   border: solid pink 5px;
   @include takeUpSpace();
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  @include flexStyle();
 }
 
-.current-container {
+.current-container, {
   border: solid orange 5px;
   @include takeUpSpace();
+  @include flexStyle();
 }
+
+.card-image-past, 
+.card-image-current,
+.card-image-future { 
+  margin-top: 10px;
+  height: 50%;
+  width: 85%;
+}
+
 
 .future-container {
-  border: solid purple 5px;
+  border: solid yellow 5px;
   @include takeUpSpace();
+  @include flexStyle();
 }
 
-.past-booking-card {
+
+.booking-card {
   height: 520px;
   width: 300px;
   border: black solid 3px;
@@ -115,13 +126,28 @@ main {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-img {
-  margin-top: 20px;
-  height: 250px;
-  width: 250px;
+// .no-rooms-img {
+//   margin-top: 20px;
+//   height: 250px;
+//   width: 250px;
+// }
+
+.no-rooms {
+  font-size: 100px;
+  display: flex;
+  background-image: url("../images/sad.png");
+  background-position-x: 60px;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+}
+
+.no-room-text {
+  text-align: right;
+  margin-right: 150px;
 }
 
 p {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+

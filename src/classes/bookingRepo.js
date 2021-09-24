@@ -76,7 +76,7 @@ class BookingRepo {
       })
     })
 
-   return totalCost
+   return totalCost.toFixed(2)
   }
 
   findRoomsByDate(userGeneratedDate, roomData) {

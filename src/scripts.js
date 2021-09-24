@@ -9,9 +9,9 @@ import BookingRepo from './classes/bookingRepo.js'
 import { fetchCustomers, fetchRooms, fetchBookings } from './apiCalls';
 import dom from './dom.js'
 import blueRoom from './images/blueroom.jpg'
+import sad from './images/sad.png'
 
 
-export let dayjs = require('dayjs')
 export let homeBtn = document.getElementById('home')
 export let bookStayBtn = document.getElementById('bookStay')
 export let pastBookingsBtn = document.getElementById('pastBookings')
@@ -24,8 +24,12 @@ export let currentContainer = document.getElementById('currentContainer')
 export let futureContainer = document.getElementById('futureContainer')
 export let welcome = document.getElementById('welcome')
 export let totalSpent = document.getElementById('totalSpent')
+export let dayjs = require('dayjs')
+export let today = new Date();
+export let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
+export let todaysDate = dayjs(date).format('YYYY/MM/DD')
 
-let customerID = 6
+export let customerID = 35
 export let customer, rooms, bookings 
 
 
@@ -35,10 +39,23 @@ window.addEventListener('load', (e) => {
 
 homeBtn.addEventListener('click', dom.goHome)
 bookStayBtn.addEventListener('click', dom.goBooking)
-pastBookingsBtn.addEventListener('click', dom.goPast)
-currentBookingsBtn.addEventListener('click', dom.goCurrent)
-futureBookingsBtn.addEventListener('click', dom.goFuture)
-pastBookingsBtn.addEventListener('click', dom.displayPastBookings)
+pastBookingsBtn.addEventListener('click', () => {
+  dom.goPast(),
+  dom.clearCards('pastContainer')
+  dom.displayPastBookings()
+
+})
+currentBookingsBtn.addEventListener('click', () => {
+  dom.goCurrent()
+  dom.clearCards('currentContainer')
+  dom.displayCurrentBookings()
+})
+futureBookingsBtn.addEventListener('click', () => {
+  dom.goFuture()
+  dom.clearCards('futureContainer')
+  dom.displayFutureBookings()
+})
+
 
 const fetchData = () => {
   Promise.all([fetchCustomers(customerID), fetchRooms(), fetchBookings()])
@@ -59,4 +76,8 @@ const instantiateClass = (customerData, roomData, bookingsData) => {
   bookings = new BookingRepo(bookingsData)
   dom.displayName()
   dom.displayTotalSpent()
+  bookings.getOnlyCustomer(customer.id, rooms.roomRepo)
+  bookings.getPastBookings(date)
+  bookings.getCurrentBookings(todaysDate)
+  bookings.getFutureBookings(todaysDate)
 }
