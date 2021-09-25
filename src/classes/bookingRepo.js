@@ -99,18 +99,22 @@ class BookingRepo {
 
   }
 
-  filterByPreferences(guestPreferences) {
-    this.availableRooms.forEach(room => {
-      let roomValues = Object.values(room).slice(1, 5)
+  //   checker(arr, target) {
+  //   target.every(v => arr.includes(v));
+  // }
 
-      guestPreferences.every(preference => {
-        if(roomValues.includes(preference) && !this.guestChoices.includes(room)) {
-          this.guestChoices.push(room)
-        }
-      })
-    })
-    return this.guestChoices
-  }
+  filterByPreferences(guestPreferences) {
+    this.guestChoices = []
+    this.availableRooms.map(room => {
+       let roomValues = Object.values(room).slice(1, 5)
+      if(guestPreferences.every(element => roomValues.includes(element)) === true) {
+        this.guestChoices.push(room)
+      }
+  })
+  return this.guestChoices
+}
+  
+
 
 }
   

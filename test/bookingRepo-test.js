@@ -739,7 +739,7 @@ describe('Bookings', () => {
 
       bookings.findRoomsByDate("2020/02/16", rooms)
 
-      expect(bookings.filterByPreferences(["single room", true])).to.deep.equal(
+      expect(bookings.filterByPreferences(["queen", true, 2])).to.deep.equal(
         [{
           "number": 5,
           "roomType": "single room",

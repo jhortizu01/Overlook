@@ -156,13 +156,17 @@ let dom = {
 
     allChoices.push(roomType, bidet, bedSize, bedNum)
 
-    
     let userPreferences = allChoices.filter(preference => {
       return preference != "no preference" && preference != 0
     })
 
+    //console.log('all', allChoices)
+
+    console.log('user pref', userPreferences)
+
     bookings.findRoomsByDate(formattedChooseDate, rooms.roomRepo)
     bookings.filterByPreferences(userPreferences)
+
     console.log('available', bookings.guestChoices)
   }
 }
