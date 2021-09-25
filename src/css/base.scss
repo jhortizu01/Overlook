@@ -59,7 +59,7 @@ nav {
     width: 120px;
     margin-right: 10px;
     margin-top: 15px;
-    border-radius: 5px;
+    border-radius: $border-radius;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 }
@@ -80,9 +80,38 @@ main {
 }
 
 .booking-container {
-  border: solid green 5px;
+  //border: solid green 5px;
+  display: flex;
   @include takeUpSpace();
-  @include flexStyle();
+
+}
+
+.booking-selection {
+  display: flex;
+  flex-direction: column;
+  border: solid black 5px;
+  border-radius: $border-radius;
+  width: 20%;
+  margin-top: 50px;
+  margin-left: 60px;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 400px
+}
+
+label {
+  margin-top: 15px;
+}
+
+.available-rooms-container {
+  //border: solid brown 5px;
+  width: 80%;
+}
+
+.preferences {
+text-align: center;
+margin-bottom: 20px;
 }
 
 .past-container {
@@ -91,7 +120,7 @@ main {
   @include flexStyle();
 }
 
-.current-container, {
+.current-container {
   border: solid orange 5px;
   @include takeUpSpace();
   @include flexStyle();
@@ -122,8 +151,11 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.submit {
+  margin-top: 25px;
 }
 
 // .no-rooms-img {
