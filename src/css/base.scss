@@ -48,9 +48,10 @@ nav {
   display: flex;
   justify-content: center;
   height: 100%;
+}
 
-
-  button {
+  button,
+  .button {
     font-family: $main-font;
     background-color: black;
     border: none;
@@ -62,7 +63,7 @@ nav {
     border-radius: $border-radius;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
-}
+
 
 main {
   height: 800px;
@@ -128,7 +129,8 @@ margin-bottom: 20px;
 
 .card-image-past, 
 .card-image-current,
-.card-image-future { 
+.card-image-future,
+.card-image { 
   margin-top: 10px;
   height: 50%;
   width: 85%;
@@ -142,7 +144,8 @@ margin-bottom: 20px;
 }
 
 
-.booking-card {
+.booking-card,
+.booking-card-new {
   height: 520px;
   width: 300px;
   border: black solid 3px;
@@ -152,6 +155,10 @@ margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.booking-card-new {
+  height: 600px;
 }
 
 .submit {

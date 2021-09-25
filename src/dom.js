@@ -125,14 +125,14 @@ let dom = {
         let cardContent = 
         `<section aria-label="booking from ${booking.date}" class="booking-card"> 
         <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-future">
-        <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
-        <p class="past-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-        <p class="past-stay-card-info" aria-label="room charges">Room Service Charges:${booking.roomServiceCharges}</p>
-        <p class="past-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-        <p class="past-stay-card-info" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
-        <p class="past-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
-        <p class="past-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
-        <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
+        <p class="future-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
+        <p class="future-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
+        <p class="future-stay-card-info" aria-label="room charges">Room Service Charges:${booking.roomServiceCharges}</p>
+        <p class="future-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
+        <p class="future-stay-card-info" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
+        <p class="future-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
+        <p class="future-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
+        <p class="future-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
         </section>`
   
         futureContainer.innerHTML += cardContent
@@ -160,20 +160,30 @@ let dom = {
       return preference != "no preference" && preference != 0
     })
 
-    //console.log('all', allChoices)
-
-    console.log('user pref', userPreferences)
-
     bookings.findRoomsByDate(formattedChooseDate, rooms.roomRepo)
-    bookings.filterByPreferences(userPreferences)
+    let filteredChoices = bookings.filterByPreferences(userPreferences)
+    console.log(bookings.guestChoices)
 
-    console.log('available', bookings.guestChoices)
-  }
+    filteredChoices.map(booking => {
+      let currentCard = document.createElement('section')
+      let cardContent = 
+      `<section aria-label="booking from ${booking.date}" class="booking-card-new"> 
+      <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image">
+      <p class="available-room-card" aria-label="date of stay">Date: ${chooseDate}</p>
+      <p class="available-room-card" aria-label="room number">Room Number:${booking.number}</p>
+      <p class="available-room-card" aria-label="room type">Room Type:${booking.roomType}</p>
+      <p class="available-room-card" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
+      <p class="available-room-card" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
+      <p class="available-room-card" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
+      <p class="available-room-card" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
+      <input type="button" aria-label="book room" id="bookRoomBtn value="Book Room" class="button"></button>
+      </section>`
+
+      availableRoomsContainer.innerHTML += cardContent
+    })
+  } 
+
 }
-
-  
-
-
 
 
 export default dom;

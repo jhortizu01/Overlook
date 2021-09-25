@@ -29,7 +29,7 @@ export let today = new Date();
 export let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
 export let todaysDate = dayjs(date).format('YYYY/MM/DD')
 export let submitBtn = document.getElementById('submit')
-
+export let availableRoomsContainer = document.getElementById('availableRoomsContainer')
 export let customerID = 35
 export let customer, rooms, bookings 
 
