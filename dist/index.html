@@ -31,33 +31,33 @@
         <input aria-label="choose date" type="date" id="start" name="trip-start" value="YYYY-MM-DD">
         <label aria-label="room type">Room Type:</label>
         <select name="room-type" id="roomType">
-          <option value="noPreference">No Preference</option>
-          <option value="singleRoom">Single Room</option>
-          <option value="juniorSuite">Junior Suite</option>
+          <option value="no preference">No Preference</option>
+          <option value="single room">Single Room</option>
+          <option value="junior suite">Junior Suite</option>
           <option value="suite">Suite</option>
-          <option value="residentialSuite">Residential Suite</option>  
+          <option value="residential suite">Residential Suite</option>  
         </select>
         <label aria-label="bidet">Would you like a bidet?:</label>
         <select name="bidet" id="bidet">
-          <option value="noPreference">No Preference</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="no preference">No Preference</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
         </select>
         <label aria-label="bed size">Bed Size:</label>
         <select name="bedSize" id="bedSize">
-          <option value="noPreference">No Preference</option>
+          <option value="no preference">No Preference</option>
           <option value="twin">Twin</option>
           <option value="full">Full</option>
           <option value="queen">Queen</option>
           <option value="king">King</option>
         </select>
         <label aria-label="bed size">Number of Beds:</label>
-        <select name="bedSize" id="bedSize">
-          <option value="noPreference">No Preference</option>
-          <option value="one">1</option>
-          <option value="two">2</option>
+        <select name="number of beds" id="bedNum">
+          <option value="0">No Preference</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
         </select>
-        <input type="submit" class="submit">  
+        <input type="submit" class="submit" id="submit">   
       </form>
       <section aria-label="Available Rooms" class="available-rooms-container" id="availableRoomsContainer"></section>
     </section>

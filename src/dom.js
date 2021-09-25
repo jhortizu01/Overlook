@@ -1,5 +1,7 @@
 import {homebtn, bookStayBtn, pastBookingsBtn, currentBookingsBtn, futureBookingsBtn,
-homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate,  } from './scripts.js'
+homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, chooseDate } from './scripts.js'
+
+let dayjs = require('dayjs')
 
 let dom = {
 
@@ -140,6 +142,28 @@ let dom = {
       let content = `<section><p class="no-room-text" aria-label="No Current Bookings"> No future bookings. <br> Book a trip today!</p></section>`
       futureContainer.innerHTML += content
     }
+  },
+
+  getUserPreferences() {
+    let chooseDate = document.getElementById('start').value
+    let formattedChooseDate = dayjs(chooseDate).format('YYYY/MM/DD')
+    let roomType = document.getElementById('roomType').value
+    let bidet = document.getElementById('bidet').value
+    let bedSize = document.getElementById('bedSize').value
+    let bedNumString = document.getElementById('bedNum').value
+    let bedNum = Number(bedNumString)
+    let allChoices = []
+
+    allChoices.push(roomType, bidet, bedSize, bedNum)
+
+    
+    let userPreferences = allChoices.filter(preference => {
+      return preference != "no preference" && preference != 0
+    })
+
+    bookings.findRoomsByDate(formattedChooseDate, rooms.roomRepo)
+    bookings.filterByPreferences(userPreferences)
+    console.log('available', bookings.guestChoices)
   }
 }
 

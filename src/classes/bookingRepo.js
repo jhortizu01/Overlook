@@ -5,7 +5,7 @@ let dayjs = require('dayjs')
 
 class BookingRepo {
   constructor(bookingData) {
-    this.bookingRepo = bookingData.bookings
+    this.bookingRepo = bookingData
     this.allCustomerBookings = []
     this.pastCustomerBookings = []
     this.currentCustomerBookings = []
@@ -39,8 +39,8 @@ class BookingRepo {
       }
     })
 
-   let order = this.pastCustomerBookings.sort((a, b) => new Date(b.date) - new Date(a.date)) 
-
+   return this.pastCustomerBookings.sort((a, b) => new Date(b.date) - new Date(a.date)) 
+   
   }
 
   getCurrentBookings(todaysDate) {
@@ -76,7 +76,7 @@ class BookingRepo {
       })
     })
 
-   return totalCost.toFixed(2)
+   return Number(totalCost.toFixed(2))
   }
 
   findRoomsByDate(userGeneratedDate, roomData) {
@@ -85,15 +85,18 @@ class BookingRepo {
     }).map(booking => booking.roomNumber)
 
     roomData.forEach(room => {
-      if(!currentBookings.includes(room.number)) {
+      if(!currentBookings.includes(room.number) && !this.availableRooms.includes(room)) {
         this.availableRooms.push(room) 
       }     
     })
+
+   
     if(this.availableRooms.length > 1) {
       return this.availableRooms
     } else {
       return "So sorry, there are no rooms available for this date! Please choose a different date."
     }
+
   }
 
   filterByPreferences(guestPreferences) {
@@ -101,7 +104,7 @@ class BookingRepo {
       let roomValues = Object.values(room).slice(1, 5)
 
       guestPreferences.every(preference => {
-        if(roomValues.includes(preference)) {
+        if(roomValues.includes(preference) && !this.guestChoices.includes(room)) {
           this.guestChoices.push(room)
         }
       })

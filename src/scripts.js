@@ -28,6 +28,7 @@ export let dayjs = require('dayjs')
 export let today = new Date();
 export let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
 export let todaysDate = dayjs(date).format('YYYY/MM/DD')
+export let submitBtn = document.getElementById('submit')
 
 export let customerID = 35
 export let customer, rooms, bookings 
@@ -56,6 +57,11 @@ futureBookingsBtn.addEventListener('click', () => {
   dom.displayFutureBookings()
 })
 
+submitBtn.addEventListener('click', (e) => {
+e.preventDefault()
+  dom.getUserPreferences()
+})
+
 
 const fetchData = () => {
   Promise.all([fetchCustomers(customerID), fetchRooms(), fetchBookings()])
@@ -73,7 +79,7 @@ const parseData = (data) => {
 const instantiateClass = (customerData, roomData, bookingsData) => {
   customer = new Customer(customerData)
   rooms = new Rooms(roomData)
-  bookings = new BookingRepo(bookingsData)
+  bookings = new BookingRepo(bookingsData.bookings)
   dom.displayName()
   dom.displayTotalSpent()
   bookings.getOnlyCustomer(customer.id, rooms.roomRepo)
