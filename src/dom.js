@@ -1,7 +1,11 @@
 import {homebtn, bookStayBtn, pastBookingsBtn, currentBookingsBtn, futureBookingsBtn,
-homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, chooseDate } from './scripts.js'
+homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, 
+customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, 
+bookNewStayBtn, customerID, parseData, fetchData, bookingMessage } from './scripts.js'
 
 let dayjs = require('dayjs')
+
+
 
 let dom = {
 
@@ -70,7 +74,7 @@ let dom = {
     totalSpent.innerText = `You have spent $${cost} since your first booking.`
   },
 
-  displayPastBookings() {
+  displayPastBookings(){
     bookings.pastCustomerBookings.map(booking => {
       let pastCard = document.createElement('section')
       pastCard.cassList = 'past-card'
@@ -101,9 +105,8 @@ let dom = {
       <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-current">
       <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
       <p class="past-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-      <p class="past-stay-card-info" aria-label="room charges">Room Service Charges:${booking.roomServiceCharges}</p>
       <p class="past-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-      <p class="past-stay-card-info" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
+      <p class="past-stay-card-info" aria-label="is there a bidet?">Bidet: ${booking.bidet}</p>
       <p class="past-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
       <p class="past-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
       <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
@@ -127,9 +130,8 @@ let dom = {
         <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-future">
         <p class="future-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
         <p class="future-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-        <p class="future-stay-card-info" aria-label="room charges">Room Service Charges:${booking.roomServiceCharges}</p>
         <p class="future-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-        <p class="future-stay-card-info" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
+        <p class="future-stay-card-info" aria-label="is there a bidet?">Bidet?: ${booking.bidet}</p>
         <p class="future-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
         <p class="future-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
         <p class="future-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
@@ -162,12 +164,12 @@ let dom = {
 
     bookings.findRoomsByDate(formattedChooseDate, rooms.roomRepo)
     let filteredChoices = bookings.filterByPreferences(userPreferences)
-    console.log(bookings.guestChoices)
-
+console.log(filteredChoices)
+  if(filteredChoices.length > 0) {
     filteredChoices.map(booking => {
       let currentCard = document.createElement('section')
       let cardContent = 
-      `<section aria-label="booking from ${booking.date}" class="booking-card-new"> 
+      `<section aria-label="booking from ${booking.date}" class="booking-card-new" id="${booking.number}"> 
       <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image">
       <p class="available-room-card" aria-label="date of stay">Date: ${chooseDate}</p>
       <p class="available-room-card" aria-label="room number">Room Number:${booking.number}</p>
@@ -176,12 +178,52 @@ let dom = {
       <p class="available-room-card" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
       <p class="available-room-card" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
       <p class="available-room-card" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
-      <input type="button" aria-label="book room" id="bookRoomBtn value="Book Room" class="button"></button>
+      <button aria-label="book stay" class="book-new-stay" id="bookNewStay">Book Room!</button>
       </section>`
 
       availableRoomsContainer.innerHTML += cardContent
     })
-  } 
+  } else {
+    dom.addClass(availableRoomsContainer, "no-rooms-preferences")
+    let content = `<section><p class="no-room-text" aria-label="No Rooms"> No rooms available for your date or preferences. Stop being so picky and try again!</p></section>`
+    availableRoomsContainer.innerHTML += content
+  }
+  
+  }, 
+
+  postValidation(data, e) {
+    let targetBtn = e.target
+    if(data.message.includes('successfully posted')){
+      targetBtn.closest("button").innerText = "Room Booked!"
+    } else {
+      targetBtn.closest("button").innerText = "Did not work. Try again later"}
+  },
+
+
+  bookRoom(e) {
+    let targetBtn = e.target
+    let roomNum = Number(targetBtn.closest('.booking-card-new').id)
+    let chooseDate = document.getElementById('start').value
+    let formattedChooseDate = dayjs(chooseDate).format('YYYY/MM/DD')
+
+    fetch('http://localhost:3001/api/v1/bookings', {
+      method: 'POST',
+      body: JSON.stringify({
+        "userID": customerID, 
+        "date": formattedChooseDate, 
+        "roomNumber": roomNum
+      }), 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => dom.postValidation(data,e))
+      .then(data => fetchData())
+      .catch(err => console.log(err))
+  }
+
+
 
 }
 

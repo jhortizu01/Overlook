@@ -24,7 +24,6 @@ class BookingRepo {
         if(booking.roomNumber === room.number) {
           let combine = Object.assign(booking, room)
           delete combine.number
-          // console.log(combine)
           this.allCustomerBookings.push(combine)
         }
       })
@@ -98,10 +97,6 @@ class BookingRepo {
     }
 
   }
-
-  //   checker(arr, target) {
-  //   target.every(v => arr.includes(v));
-  // }
 
   filterByPreferences(guestPreferences) {
     this.guestChoices = []
