@@ -1,0 +1,11 @@
+@mixin takeUpSpace() {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin flexStyle() {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+

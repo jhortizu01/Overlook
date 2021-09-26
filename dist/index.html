@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style> @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');</style>
+  <title>Overlook</title>
+</head>
+<body>
+  <section aria-label="Overlook Hotel Banner" class="banner"> 
+    <p aria-label="Overlook." class="overlook-title">Overlook.</p>
+    <section class="user-welcome">
+      <p aria-label="Welcome" class="welcome" id="welcome"></p>
+      <p aria-label="You have spent $100 this year on bookings" class="total-spent" id="totalSpent">You have spent $1,000 this year on bookings.</p>
+    </section>
+  </section>
+  <nav>
+    <button aria-label="home" class="home-button" id="home">Home</button>
+    <button aria-label="book a stay" class="book-stay-button" id="bookStay">Book A Stay</button>
+    <button aria-label="Past Bookings" class="past-bookings-button" id="pastBookings">Past Bookings</button>
+    <button aria-label="Current Bookings" class="current-bookings-button" id="currentBookings">Current Bookings</button>
+    <button aria-label="Future Bookings" class="future-bookings-button" id="futureBookings">Future Bookings</button>
+  </nav>
+  <main>
+    <section aria-label="home" class="home-container" id="homeContainer"></section>
+    <section aria-label="book a stay" class="booking-container hidden" id="bookingContainer">
+      <form aria-label="Booking Selections" class="booking-selection" id="bookingSelection">
+        <h1 class="preferences" aria-label="Preferences">Preferences</h1>
+        <label aria-label="Date of Stay" class="dateOfStayText">Date of Stay:</label>
+        <input aria-label="choose date" type="date" id="start" name="trip-start" value="YYYY-MM-DD">
+        <label aria-label="room type">Room Type:</label>
+        <select name="room-type" id="roomType">
+          <option value="noPreference">No Preference</option>
+          <option value="singleRoom">Single Room</option>
+          <option value="juniorSuite">Junior Suite</option>
+          <option value="suite">Suite</option>
+          <option value="residentialSuite">Residential Suite</option>  
+        </select>
+        <label aria-label="bidet">Would you like a bidet?:</label>
+        <select name="bidet" id="bidet">
+          <option value="noPreference">No Preference</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <label aria-label="bed size">Bed Size:</label>
+        <select name="bedSize" id="bedSize">
+          <option value="noPreference">No Preference</option>
+          <option value="twin">Twin</option>
+          <option value="full">Full</option>
+          <option value="queen">Queen</option>
+          <option value="king">King</option>
+        </select>
+        <label aria-label="bed size">Number of Beds:</label>
+        <select name="bedSize" id="bedSize">
+          <option value="noPreference">No Preference</option>
+          <option value="one">1</option>
+          <option value="two">2</option>
+        </select>
+        <input type="submit" class="submit">  
+      </form>
+      <section aria-label="Available Rooms" class="available-rooms-container" id="availableRoomsContainer"></section>
+    </section>
+    <section aria-label="past bookings" class="past-container hidden" id="pastContainer"></section>
+    <section aria-label="current bookings" class="current-container hidden" id="currentContainer"></section>
+    <section aria-label="future bookings" class="future-container hidden" id="futureContainer"></section>
+  </main>
+
+  
+  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <script src="bundle.js"></script>
+
+</body>
+</html>
