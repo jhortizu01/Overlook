@@ -9,7 +9,7 @@
 </head>
 <body>
   <section aria-label="Overlook Hotel Banner" class="banner"> 
-    <p aria-label="Overlook." class="overlook-title">Overlook.</p>
+    <h1 aria-label="Overlook." class="overlook-title">Overlook.</h1>
     <section class="user-welcome">
       <p aria-label="Welcome" class="welcome" id="welcome"></p>
       <p aria-label="You have spent $100 this year on bookings" class="total-spent" id="totalSpent">You have spent $1,000 this year on bookings.</p>
@@ -23,7 +23,10 @@
     <button aria-label="Future Bookings" class="future-bookings-button" id="futureBookings">Future Bookings</button>
   </nav>
   <main>
-    <section aria-label="home" class="home-container" id="homeContainer"></section>
+    <section aria-label="home" class="home-container" id="homeContainer">
+      <h2 class="home-title"><i>Come stay awhile!</i></h2>
+      <img class="overlook-image" src= "../images/overlook.jpg" alt="Image of large hotel with planters in the front">
+    </section>
     <section aria-label="book a stay" class="booking-container hidden" id="bookingContainer">
       <form aria-label="Booking Selections" class="booking-selection" id="bookingSelection">
         <h1 class="preferences" aria-label="Preferences">Preferences</h1>
@@ -31,33 +34,33 @@
         <input aria-label="choose date" type="date" id="start" name="trip-start" value="YYYY-MM-DD">
         <label aria-label="room type">Room Type:</label>
         <select name="room-type" id="roomType">
-          <option value="noPreference">No Preference</option>
-          <option value="singleRoom">Single Room</option>
-          <option value="juniorSuite">Junior Suite</option>
-          <option value="suite">Suite</option>
-          <option value="residentialSuite">Residential Suite</option>  
+          <option aria-label="no preference" value="no preference">No Preference</option>
+          <option aria-label="single room" value="single room">Single Room</option>
+          <option aria-label="junior suite" value="junior suite">Junior Suite</option>
+          <option aria-label="suite" value="suite">Suite</option>
+          <option aria-label="residential suite" value="residential suite">Residential Suite</option>  
         </select>
         <label aria-label="bidet">Would you like a bidet?:</label>
         <select name="bidet" id="bidet">
-          <option value="noPreference">No Preference</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option aria-label="no preference" value="no preference">No Preference</option>
+          <option aria-label="true" value="true">Yes</option>
+          <option aria-label="false" value="false">No</option>
         </select>
         <label aria-label="bed size">Bed Size:</label>
         <select name="bedSize" id="bedSize">
-          <option value="noPreference">No Preference</option>
-          <option value="twin">Twin</option>
-          <option value="full">Full</option>
-          <option value="queen">Queen</option>
-          <option value="king">King</option>
+          <option aria-label="no preference" value="no preference">No Preference</option>
+          <option aria-label="twin" value="twin">Twin</option>
+          <option aria-label="full" value="full">Full</option>
+          <option aria-label="queen" value="queen">Queen</option>
+          <option aria-label="king" value="king">King</option>
         </select>
         <label aria-label="bed size">Number of Beds:</label>
-        <select name="bedSize" id="bedSize">
-          <option value="noPreference">No Preference</option>
-          <option value="one">1</option>
-          <option value="two">2</option>
+        <select name="number of beds" id="bedNum">
+          <option aria-label="no preference" value="0">No Preference</option>
+          <option aria-label="one" value="1">1</option>
+          <option aria-label="two" value="2">2</option>
         </select>
-        <input type="submit" class="submit">  
+        <input type="submit" class="submit" id="submit">   
       </form>
       <section aria-label="Available Rooms" class="available-rooms-container" id="availableRoomsContainer"></section>
     </section>

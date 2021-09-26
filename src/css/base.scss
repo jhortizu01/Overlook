@@ -48,9 +48,10 @@ nav {
   display: flex;
   justify-content: center;
   height: 100%;
+}
 
-
-  button {
+  button,
+  .button {
     font-family: $main-font;
     background-color: black;
     border: none;
@@ -62,18 +63,39 @@ nav {
     border-radius: $border-radius;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
-}
+
 
 main {
   height: 800px;
 }
 
 .home-container {
-  border: 3px solid red;
+  // background-image: url();
+  // background-size: 80% 80%;
+  // background-repeat: no-repeat;
+  // background-position-x: center;
+  //border: 3px solid red;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.home-title {
+  font-size: 100px;
+  color: black;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.overlook-image {
+  align-items: center;
+  height: 80%;
+  width: 80%;
+}
 
 .hidden {
   display: none !important;;
@@ -86,10 +108,16 @@ main {
 
 }
 
+.available-rooms-container {
+  display: flex;
+  @include takeUpSpace();
+  @include flexStyle();
+}
+
 .booking-selection {
   display: flex;
   flex-direction: column;
-  border: solid black 5px;
+  border: solid black 3px;
   border-radius: $border-radius;
   width: 20%;
   margin-top: 50px;
@@ -128,7 +156,8 @@ margin-bottom: 20px;
 
 .card-image-past, 
 .card-image-current,
-.card-image-future { 
+.card-image-future,
+.card-image { 
   margin-top: 10px;
   height: 50%;
   width: 85%;
@@ -142,7 +171,8 @@ margin-bottom: 20px;
 }
 
 
-.booking-card {
+.booking-card,
+.booking-card-new {
   height: 520px;
   width: 300px;
   border: black solid 3px;
@@ -152,6 +182,10 @@ margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.booking-card-new {
+  height: 600px;
 }
 
 .submit {
@@ -183,3 +217,10 @@ p {
   margin-bottom: 5px;
 }
 
+.no-rooms-preferences {
+  font-size: 100px;
+  display: flex;
+  background-position-x: 60px;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+}

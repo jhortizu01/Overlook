@@ -5,7 +5,7 @@ let dayjs = require('dayjs')
 
 class BookingRepo {
   constructor(bookingData) {
-    this.bookingRepo = bookingData.bookings
+    this.bookingRepo = bookingData
     this.allCustomerBookings = []
     this.pastCustomerBookings = []
     this.currentCustomerBookings = []
@@ -24,7 +24,6 @@ class BookingRepo {
         if(booking.roomNumber === room.number) {
           let combine = Object.assign(booking, room)
           delete combine.number
-          // console.log(combine)
           this.allCustomerBookings.push(combine)
         }
       })
@@ -39,8 +38,8 @@ class BookingRepo {
       }
     })
 
-   let order = this.pastCustomerBookings.sort((a, b) => new Date(b.date) - new Date(a.date)) 
-
+   return this.pastCustomerBookings.sort((a, b) => new Date(b.date) - new Date(a.date)) 
+   
   }
 
   getCurrentBookings(todaysDate) {
@@ -76,7 +75,7 @@ class BookingRepo {
       })
     })
 
-   return totalCost.toFixed(2)
+   return Number(totalCost.toFixed(2))
   }
 
   findRoomsByDate(userGeneratedDate, roomData) {
@@ -85,29 +84,32 @@ class BookingRepo {
     }).map(booking => booking.roomNumber)
 
     roomData.forEach(room => {
-      if(!currentBookings.includes(room.number)) {
+      if(!currentBookings.includes(room.number) && !this.availableRooms.includes(room)) {
         this.availableRooms.push(room) 
       }     
     })
+
+   
     if(this.availableRooms.length > 1) {
       return this.availableRooms
     } else {
       return "So sorry, there are no rooms available for this date! Please choose a different date."
     }
+
   }
 
   filterByPreferences(guestPreferences) {
-    this.availableRooms.forEach(room => {
-      let roomValues = Object.values(room).slice(1, 5)
+    this.guestChoices = []
+    this.availableRooms.map(room => {
+       let roomValues = Object.values(room).slice(1, 5)
+      if(guestPreferences.every(element => roomValues.includes(element)) === true) {
+        this.guestChoices.push(room)
+      }
+  })
+  return this.guestChoices
+}
+  
 
-      guestPreferences.every(preference => {
-        if(roomValues.includes(preference)) {
-          this.guestChoices.push(room)
-        }
-      })
-    })
-    return this.guestChoices
-  }
 
 }
   

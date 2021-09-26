@@ -28,36 +28,13 @@ export let dayjs = require('dayjs')
 export let today = new Date();
 export let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
 export let todaysDate = dayjs(date).format('YYYY/MM/DD')
-
+export let submitBtn = document.getElementById('submit')
+export let availableRoomsContainer = document.getElementById('availableRoomsContainer')
+export let bookingMessage = document.getElementById('bookingMessage')
 export let customerID = 35
 export let customer, rooms, bookings 
 
-
-window.addEventListener('load', (e) => {
-  fetchData()
-})
-
-homeBtn.addEventListener('click', dom.goHome)
-bookStayBtn.addEventListener('click', dom.goBooking)
-pastBookingsBtn.addEventListener('click', () => {
-  dom.goPast(),
-  dom.clearCards('pastContainer')
-  dom.displayPastBookings()
-
-})
-currentBookingsBtn.addEventListener('click', () => {
-  dom.goCurrent()
-  dom.clearCards('currentContainer')
-  dom.displayCurrentBookings()
-})
-futureBookingsBtn.addEventListener('click', () => {
-  dom.goFuture()
-  dom.clearCards('futureContainer')
-  dom.displayFutureBookings()
-})
-
-
-const fetchData = () => {
+export const fetchData = () => {
   Promise.all([fetchCustomers(customerID), fetchRooms(), fetchBookings()])
     .then(data => parseData(data))
 }
@@ -73,7 +50,7 @@ const parseData = (data) => {
 const instantiateClass = (customerData, roomData, bookingsData) => {
   customer = new Customer(customerData)
   rooms = new Rooms(roomData)
-  bookings = new BookingRepo(bookingsData)
+  bookings = new BookingRepo(bookingsData.bookings)
   dom.displayName()
   dom.displayTotalSpent()
   bookings.getOnlyCustomer(customer.id, rooms.roomRepo)
@@ -81,3 +58,39 @@ const instantiateClass = (customerData, roomData, bookingsData) => {
   bookings.getCurrentBookings(todaysDate)
   bookings.getFutureBookings(todaysDate)
 }
+
+window.addEventListener('load', () => {
+  fetchData()
+})
+
+homeBtn.addEventListener('click', dom.goHome)
+bookStayBtn.addEventListener('click', dom.goBooking)
+pastBookingsBtn.addEventListener('click', () => {
+  dom.goPast(),
+  dom.clearCards('pastContainer')
+  dom.displayPastBookings()
+})
+
+currentBookingsBtn.addEventListener('click', () => {
+  dom.goCurrent()
+  dom.clearCards('currentContainer')
+  dom.displayCurrentBookings()
+})
+
+futureBookingsBtn.addEventListener('click', () => {
+  dom.goFuture()
+  dom.clearCards('futureContainer')
+  dom.displayFutureBookings()
+})
+
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  dom.clearCards('availableRoomsContainer')
+  dom.getUserPreferences()
+})
+
+availableRoomsContainer.addEventListener('click', (e) => {
+  dom.bookRoom(e)
+})
+
+
