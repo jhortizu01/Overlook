@@ -7,7 +7,7 @@ import Rooms from './classes/rooms.js'
 import Customer from './classes/customer.js'
 import BookingRepo from './classes/bookingRepo.js'
 import { fetchCustomers, fetchRooms, fetchBookings } from './apiCalls';
-import dom from './dom.js'
+import { dom }from './dom.js'
 import blueRoom from './images/blueroom.jpg'
 import sad from './images/sad.png'
 import './images/overlook.jpg'
@@ -32,12 +32,15 @@ export let submitBtn = document.getElementById('submit')
 export let availableRoomsContainer = document.getElementById('availableRoomsContainer')
 export let bookingMessage = document.getElementById('bookingMessage')
 export let submitCreds = document.getElementById('submitCreds')
+export let everything = document.getElementById('everything')
+export let loginPage = document.getElementById('loginPage')
 
-export let customerID = 35
+// let customerNumber = null; 
+
 export let customer, rooms, bookings 
 
-export const fetchData = () => {
-  Promise.all([fetchCustomers(customerID), fetchRooms(), fetchBookings()])
+export const fetchData = (customerNumber) => {
+  Promise.all([fetchCustomers(customerNumber), fetchRooms(), fetchBookings()])
     .then(data => parseData(data))
 }
 
@@ -50,6 +53,7 @@ const parseData = (data) => {
 }
 
 const instantiateClass = (customerData, roomData, bookingsData) => {
+  console.log(customerData)
   customer = new Customer(customerData)
   rooms = new Rooms(roomData)
   bookings = new BookingRepo(bookingsData.bookings)
@@ -61,9 +65,43 @@ const instantiateClass = (customerData, roomData, bookingsData) => {
   bookings.getFutureBookings(todaysDate)
 }
 
-window.addEventListener('load', () => {
-  fetchData()
-})
+const logInToPage = (e) => {
+  e.preventDefault()
+  let userGeneratedName = document.getElementById('userName').value
+  let userGeneratedPassword = document.getElementById('password').value
+  
+  let customerNumber = getCustomerNumber(userGeneratedName)
+
+  if(customerNumber > 0 && customerNumber <= 50 && userGeneratedPassword === "overlook2021") {
+    dom.removeClass(everything, "hidden")
+    dom.addClass(loginPage, "hidden")
+    fetchData(customerNumber)
+  }
+}
+
+const getCustomerNumber = (userGeneratedName) => {
+  let getUserNumber = userGeneratedName.split("")
+  
+  let returnNumber = getUserNumber.filter(character => {
+   return character === "1" ||
+   character === "2" ||
+   character === "3" ||
+   character === "4" ||
+   character === "5" ||
+   character === "6" ||
+   character === "7" ||
+   character === "8" ||
+   character === "9" ||
+   character === "0"
+  })
+
+  return Number(returnNumber.join(""))
+}
+
+
+// window.addEventListener('load', () => {
+//   fetchData()
+// })
 
 homeBtn.addEventListener('click', dom.goHome)
 bookStayBtn.addEventListener('click', dom.goBooking)
@@ -96,6 +134,6 @@ availableRoomsContainer.addEventListener('click', (e) => {
 })
 
 
-submitCreds.addEventListener('click', () => {
-  dom.logInToPage()
+submitCreds.addEventListener('click', (e) => {
+  logInToPage(e)
 })

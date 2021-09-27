@@ -1,7 +1,7 @@
 import {homebtn, bookStayBtn, pastBookingsBtn, currentBookingsBtn, futureBookingsBtn,
 homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, 
 customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, 
-bookNewStayBtn, customerID, parseData, fetchData, bookingMessage } from './scripts.js'
+bookNewStayBtn, customerID, parseData, fetchData, bookingMessage, everything, loginPage } from './scripts.js'
 
 let dayjs = require('dayjs')
 
@@ -223,12 +223,28 @@ console.log(filteredChoices)
       .catch(err => console.log(err))
   },
 
-  logInToPage() {
-    let userGeneratedName = document.getElementById('userName').value
-    console.log(userGeneratedName)
+  getCustomerNumber(userGeneratedName) {
+    let getUserNumber = userGeneratedName.split("")
+    
+    let returnNumber = getUserNumber.filter(character => {
+     return character === "1" ||
+     character === "2" ||
+     character === "3" ||
+     character === "4" ||
+     character === "5" ||
+     character === "6" ||
+     character === "7" ||
+     character === "8" ||
+     character === "9" ||
+     character === "0"
+    })
+
+    return Number(returnNumber.join(""))
   }
 
 }
 
+let customerNumber 
 
-export default dom;
+
+export { dom, customerNumber } 
