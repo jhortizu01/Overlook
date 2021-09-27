@@ -7,6 +7,10 @@ html {
   width: 100vw;
 }
 
+.login-labels {
+  display: flex;
+}
+
 .login-page {
   background-color: black;
   height: 100vh;
@@ -23,13 +27,18 @@ html {
   font-size: 60px;
 }
 
+.wrong-password,
+.wrong-user-name {
+  color: red;
+}
+
 .login {
   background-color: white;
   font-family: $main-font;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  width: 400px;
   height: 200px;
   padding-left: 30px;
   padding-right: 30px;

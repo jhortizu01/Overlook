@@ -1,7 +1,8 @@
 import {homebtn, bookStayBtn, pastBookingsBtn, currentBookingsBtn, futureBookingsBtn,
 homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, 
 customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, 
-bookNewStayBtn, customerID, parseData, fetchData, bookingMessage, everything, loginPage } from './scripts.js'
+bookNewStayBtn, customerID, parseData, fetchData, bookingMessage, everything, loginPage,
+ customerNumber, roomPics, randomNum, randomRoomPics } from './scripts.js'
 
 let dayjs = require('dayjs')
 
@@ -78,21 +79,23 @@ let dom = {
     bookings.pastCustomerBookings.map(booking => {
       let pastCard = document.createElement('section')
       pastCard.cassList = 'past-card'
+      let convertBidet = dom.converToYorN(booking.bidet)
 
       let cardContent = 
       `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-      <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-past">
+      ${dom.findRandom()}
       <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
-      <p class="past-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-      <p class="past-stay-card-info" aria-label="room charges">Room Service Charges:${booking.roomServiceCharges}</p>
-      <p class="past-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-      <p class="past-stay-card-info" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
+      <p class="past-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
+      <p class="past-stay-card-info" aria-label="room charges">Room Service Charges: ${booking.roomServiceCharges}</p>
+      <p class="past-stay-card-info" aria-label="room type">Room Type: ${booking.roomType}</p>
+      <p class="past-stay-card-info" aria-label="was there a bidet?">Bidet?: ${convertBidet}</p>
       <p class="past-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
       <p class="past-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
-      <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
+      <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night: ${booking.costPerNight}</p>
       </section>`
 
       pastContainer.innerHTML += cardContent
+
     })
   },
 
@@ -100,19 +103,22 @@ let dom = {
     if(bookings.currentCustomerBookings.length > 0){
     bookings.currentCustomerBookings.map(booking => {
       let currentCard = document.createElement('section')
+      let convertBidet = dom.converToYorN(booking.bidet)
+
       let cardContent = 
       `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-      <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-current">
+      ${dom.findRandom()}
       <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
-      <p class="past-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-      <p class="past-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-      <p class="past-stay-card-info" aria-label="is there a bidet?">Bidet: ${booking.bidet}</p>
+      <p class="past-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
+      <p class="past-stay-card-info" aria-label="room type">Room Type: ${booking.roomType}</p>
+      <p class="past-stay-card-info" aria-label="is there a bidet?">Bidet: ${convertBidet}</p>
       <p class="past-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
       <p class="past-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
-      <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
+      <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night: ${booking.costPerNight}</p>
       </section>`
 
       currentContainer.innerHTML += cardContent
+
     })
   } else {
     dom.addClass(currentContainer, "no-rooms")
@@ -125,16 +131,17 @@ let dom = {
     if(bookings.futureCustomerBookings.length > 0){
       bookings.futureCustomerBookings.map(booking => {
         let currentCard = document.createElement('section')
+        let convertBidet = dom.converToYorN(booking.bidet)
         let cardContent = 
         `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-        <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image-future">
+        ${dom.findRandom()}
         <p class="future-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
-        <p class="future-stay-card-info" aria-label="room number">Room Number:${booking.roomNumber}</p>
-        <p class="future-stay-card-info" aria-label="room type">Room Type:${booking.roomType}</p>
-        <p class="future-stay-card-info" aria-label="is there a bidet?">Bidet?: ${booking.bidet}</p>
+        <p class="future-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
+        <p class="future-stay-card-info" aria-label="room type">Room Type: ${booking.roomType}</p>
+        <p class="future-stay-card-info" aria-label="is there a bidet?">Bidet?: ${convertBidet}</p>
         <p class="future-stay-card-info" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
         <p class="future-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
-        <p class="future-stay-card-info" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
+        <p class="future-stay-card-info" aria-label="cost per night">Cost Per Night: ${booking.costPerNight}</p>
         </section>`
   
         futureContainer.innerHTML += cardContent
@@ -151,12 +158,13 @@ let dom = {
     let formattedChooseDate = dayjs(chooseDate).format('YYYY/MM/DD')
     let roomType = document.getElementById('roomType').value
     let bidet = document.getElementById('bidet').value
+    let bidetBoolean = dom.convertToBoolean(bidet)
     let bedSize = document.getElementById('bedSize').value
     let bedNumString = document.getElementById('bedNum').value
     let bedNum = Number(bedNumString)
     let allChoices = []
 
-    allChoices.push(roomType, bidet, bedSize, bedNum)
+    allChoices.push(roomType, bidetBoolean, bedSize, bedNum)
 
     let userPreferences = allChoices.filter(preference => {
       return preference != "no preference" && preference != 0
@@ -164,31 +172,32 @@ let dom = {
 
     bookings.findRoomsByDate(formattedChooseDate, rooms.roomRepo)
     let filteredChoices = bookings.filterByPreferences(userPreferences)
-console.log(filteredChoices)
-  if(filteredChoices.length > 0) {
-    filteredChoices.map(booking => {
-      let currentCard = document.createElement('section')
-      let cardContent = 
-      `<section aria-label="booking from ${booking.date}" class="booking-card-new" id="${booking.number}"> 
-      <img src="./images/blueroom.jpg" alt="vintage 1970's blue aestheticroom" class="card-image">
-      <p class="available-room-card" aria-label="date of stay">Date: ${chooseDate}</p>
-      <p class="available-room-card" aria-label="room number">Room Number:${booking.number}</p>
-      <p class="available-room-card" aria-label="room type">Room Type:${booking.roomType}</p>
-      <p class="available-room-card" aria-label="was there a bidet?">Bidet?: ${booking.bidet}</p>
-      <p class="available-room-card" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
-      <p class="available-room-card" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
-      <p class="available-room-card" aria-label="cost per night">Cost Per Night:${booking.costPerNight}</p>
-      <button aria-label="book stay" class="book-new-stay" id="bookNewStay">Book Room!</button>
-      </section>`
 
-      availableRoomsContainer.innerHTML += cardContent
-    })
-  } else {
-    dom.addClass(availableRoomsContainer, "no-rooms-preferences")
-    let content = `<section><p class="no-room-text" aria-label="No Rooms"> No rooms available for your date or preferences. Stop being so picky and try again!</p></section>`
-    availableRoomsContainer.innerHTML += content
-  }
-  
+    if(filteredChoices.length > 0) {
+      filteredChoices.map(booking => {
+        let convertBidet = dom.converToYorN(booking.bidet)
+        let currentCard = document.createElement('section')
+        let cardContent = 
+        `<section aria-label="booking from ${booking.date}" class="booking-card-new" id=" ${booking.number}"> 
+        ${dom.findRandom()}
+        <p class="available-room-card" aria-label="date of stay">Date: ${chooseDate}</p>
+        <p class="available-room-card" aria-label="room number">Room Number: ${booking.number}</p>
+        <p class="available-room-card" aria-label="room type">Room Type: ${booking.roomType}</p>
+        <p class="available-room-card" aria-label="was there a bidet?">Bidet?: ${convertBidet}</p>
+        <p class="available-room-card" aria-label="bedsize">Bed Size: ${booking.bedSize}</p>
+        <p class="available-room-card" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
+        <p class="available-room-card" aria-label="cost per night">Cost Per Night: ${booking.costPerNight}</p>
+        <button aria-label="book stay" class="book-new-stay" id="bookNewStay">Book Room!</button>
+        </section>`
+
+        availableRoomsContainer.innerHTML += cardContent
+      })
+    } else {
+      dom.addClass(availableRoomsContainer, "no-rooms-preferences")
+      let content = `<section><p class="no-room-text" aria-label="No Rooms"> No rooms available for your date or preferences. Stop being so picky and try again!</p></section>`
+      availableRoomsContainer.innerHTML += content
+    }
+
   }, 
 
   postValidation(data, e) {
@@ -209,7 +218,7 @@ console.log(filteredChoices)
     fetch('http://localhost:3001/api/v1/bookings', {
       method: 'POST',
       body: JSON.stringify({
-        "userID": customerID, 
+        "userID": customerNumber, 
         "date": formattedChooseDate, 
         "roomNumber": roomNum
       }), 
@@ -219,7 +228,7 @@ console.log(filteredChoices)
     })
       .then(response => response.json())
       .then(data => dom.postValidation(data,e))
-      .then(data => fetchData())
+      .then(data => fetchData(customerNumber))
       .catch(err => console.log(err))
   },
 
@@ -240,11 +249,32 @@ console.log(filteredChoices)
     })
 
     return Number(returnNumber.join(""))
+  },
+
+  convertToBoolean(value) {
+    if(value === "true") {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  converToYorN(value) {
+    if(value === true) {
+      return "Yes"
+    } else {
+      return "No"
+    }
+  },
+
+
+  findRandom() {
+    return roomPics[Math.floor(Math.random() * roomPics.length)]
   }
 
 }
 
-let customerNumber 
 
 
-export { dom, customerNumber } 
+
+export { dom } 

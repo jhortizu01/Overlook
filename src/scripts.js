@@ -8,8 +8,12 @@ import Customer from './classes/customer.js'
 import BookingRepo from './classes/bookingRepo.js'
 import { fetchCustomers, fetchRooms, fetchBookings } from './apiCalls';
 import { dom }from './dom.js'
-import blueRoom from './images/blueroom.jpg'
-import sad from './images/sad.png'
+import './images/blueroom.jpg'
+import './images/green_room.jpg'
+import './images/orange_room.jpg'
+import './images/red_room.jpg'
+import './images/yellow_room.png'
+import './images/sad.png'
 import './images/overlook.jpg'
 
 export let homeBtn = document.getElementById('home')
@@ -35,9 +39,18 @@ export let submitCreds = document.getElementById('submitCreds')
 export let everything = document.getElementById('everything')
 export let loginPage = document.getElementById('loginPage')
 
-// let customerNumber = null; 
+export let roomPics = ["<img src='./images/blueroom.jpg' alt='vintage 1970s blue aestheticroom' class='card-image-current'>", 
+"<img src='./images/green_room.jpg' alt='vintage 1970s blue aestheticroom' class='card-image-current'>",
+"<img src='./images/orange_room.jpg' alt='vintage 1970s blue aestheticroom' class='card-image-current'>",
+"<img src='./images/red_room.jpg' alt='vintage 1970s blue aestheticroom' class='card-image-current'>",
+"<img src='./images/yellow_room.png' alt='vintage 1970s blue aestheticroom' class='card-image-current'>"
+]
 
-export let customer, rooms, bookings 
+export let randomRoomPics = Math.floor(Math.random() * roomPics.length);
+
+export let randomImg = document.getElementById('images')
+
+export let customer, rooms, bookings, customerNumber
 
 export const fetchData = (customerNumber) => {
   Promise.all([fetchCustomers(customerNumber), fetchRooms(), fetchBookings()])
@@ -69,14 +82,21 @@ const logInToPage = (e) => {
   e.preventDefault()
   let userGeneratedName = document.getElementById('userName').value
   let userGeneratedPassword = document.getElementById('password').value
-  
-  let customerNumber = getCustomerNumber(userGeneratedName)
-
+  let wrongUsername = document.getElementById('wrongUsername')
+  let wrongPassword = document.getElementById('wrongPassword')
+  customerNumber = getCustomerNumber(userGeneratedName)
+console.log('RANDOM PIC', randomRoomPics)
   if(customerNumber > 0 && customerNumber <= 50 && userGeneratedPassword === "overlook2021") {
     dom.removeClass(everything, "hidden")
     dom.addClass(loginPage, "hidden")
     fetchData(customerNumber)
-  }
+  } else if(customerNumber > 50 || customerNumber === 0) {
+    dom.removeClass(wrongUsername, "hidden")
+  } 
+  
+  if(userGeneratedPassword != "overlook2021") {
+    dom.removeClass(wrongPassword, "hidden")
+  } 
 }
 
 const getCustomerNumber = (userGeneratedName) => {
@@ -98,11 +118,6 @@ const getCustomerNumber = (userGeneratedName) => {
   return Number(returnNumber.join(""))
 }
 
-
-// window.addEventListener('load', () => {
-//   fetchData()
-// })
-
 homeBtn.addEventListener('click', dom.goHome)
 bookStayBtn.addEventListener('click', dom.goBooking)
 pastBookingsBtn.addEventListener('click', () => {
@@ -110,6 +125,7 @@ pastBookingsBtn.addEventListener('click', () => {
   dom.clearCards('pastContainer')
   dom.displayPastBookings()
 })
+
 
 currentBookingsBtn.addEventListener('click', () => {
   dom.goCurrent()
@@ -121,6 +137,7 @@ futureBookingsBtn.addEventListener('click', () => {
   dom.goFuture()
   dom.clearCards('futureContainer')
   dom.displayFutureBookings()
+  dom.findRandom()
 })
 
 submitBtn.addEventListener('click', (e) => {
