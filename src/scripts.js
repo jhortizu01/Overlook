@@ -10,7 +10,7 @@ import { fetchCustomers, fetchRooms, fetchBookings } from './apiCalls';
 import dom from './dom.js'
 import blueRoom from './images/blueroom.jpg'
 import sad from './images/sad.png'
-
+import './images/overlook.jpg'
 
 export let homeBtn = document.getElementById('home')
 export let bookStayBtn = document.getElementById('bookStay')
@@ -31,6 +31,8 @@ export let todaysDate = dayjs(date).format('YYYY/MM/DD')
 export let submitBtn = document.getElementById('submit')
 export let availableRoomsContainer = document.getElementById('availableRoomsContainer')
 export let bookingMessage = document.getElementById('bookingMessage')
+export let submitCreds = document.getElementById('submitCreds')
+
 export let customerID = 35
 export let customer, rooms, bookings 
 
@@ -94,3 +96,6 @@ availableRoomsContainer.addEventListener('click', (e) => {
 })
 
 
+submitCreds.addEventListener('click', () => {
+  dom.logInToPage()
+})

@@ -221,9 +221,12 @@ console.log(filteredChoices)
       .then(data => dom.postValidation(data,e))
       .then(data => fetchData())
       .catch(err => console.log(err))
+  },
+
+  logInToPage() {
+    let userGeneratedName = document.getElementById('userName').value
+    console.log(userGeneratedName)
   }
-
-
 
 }
 
