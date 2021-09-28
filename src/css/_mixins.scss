@@ -1,6 +1,6 @@
-@mixin takeUpSpace() {
-  height: 100%;
-  width: 100%;
+@mixin takeUpSpace($number) {
+  height: $number;
+  width: $number;
 }
 
 @mixin flexStyle() {
@@ -9,3 +9,8 @@
   justify-content: center;
 }
 
+@mixin flexColumCenterStyle() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

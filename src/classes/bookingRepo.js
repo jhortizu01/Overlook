@@ -1,7 +1,5 @@
 
 let dayjs = require('dayjs')
-// let today = new Date();
-// let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
 
 class BookingRepo {
   constructor(bookingData) {
@@ -48,7 +46,7 @@ class BookingRepo {
         this.currentCustomerBookings.push(booking)
       }
     })
-   return this.currentCustomerBookings
+   return this.currentCustomerBookings.sort((a, b) => new Date(a.date) - new Date(b.date))
   }
 
   getFutureBookings(todaysDate) {
@@ -57,7 +55,7 @@ class BookingRepo {
         this.futureCustomerBookings.push(booking)
       }
     })
-   return this.futureCustomerBookings
+   return this.futureCustomerBookings.sort((a, b) => new Date(a.date) - new Date(b.date))
   }
 
   findTotalSpent(customerID, roomData) { 
