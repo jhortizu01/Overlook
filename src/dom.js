@@ -1,12 +1,13 @@
-import {homebtn, bookStayBtn, pastBookingsBtn, currentBookingsBtn, futureBookingsBtn,
-homeContainer, bookingContainer, pastContainer, currentContainer, futureContainer, 
-customer, rooms, bookings, roomArray, welcome, totalSpent, today, date, todaysDate, 
-bookNewStayBtn, customerID, parseData, fetchData, bookingMessage, everything, loginPage,
- customerNumber, roomPics, randomNum, randomRoomPics } from './scripts.js'
+import {pastContainer, 
+currentContainer, futureContainer, customer, rooms, 
+bookings,  fetchData, customerNumber, 
+roomPics} from './scripts.js'
 
+let homeContainer = document.getElementById('homeContainer')
+let bookingContainer = document.getElementById('bookingContainer')
+let welcome = document.getElementById('welcome')
+let totalSpent = document.getElementById('totalSpent')
 let dayjs = require('dayjs')
-
-
 
 let dom = {
 
@@ -80,10 +81,9 @@ let dom = {
       let pastCard = document.createElement('section')
       pastCard.cassList = 'past-card'
       let convertBidet = dom.converToYorN(booking.bidet)
-
       let cardContent = 
       `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-      ${dom.findRandom()}
+      ${dom.findRoomPic(booking.roomType)}
       <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
       <p class="past-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
       <p class="past-stay-card-info" aria-label="room charges">Room Service Charges: ${booking.roomServiceCharges}</p>
@@ -93,9 +93,7 @@ let dom = {
       <p class="past-stay-card-info" aria-label="number of beds">Number of Beds: ${booking.numBeds}</p>
       <p class="past-stay-card-info" aria-label="cost per night">Cost Per Night: ${booking.costPerNight}</p>
       </section>`
-
       pastContainer.innerHTML += cardContent
-
     })
   },
 
@@ -104,10 +102,9 @@ let dom = {
     bookings.currentCustomerBookings.map(booking => {
       let currentCard = document.createElement('section')
       let convertBidet = dom.converToYorN(booking.bidet)
-
       let cardContent = 
       `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-      ${dom.findRandom()}
+      ${dom.findRoomPic(booking.roomType)}
       <p class="past-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
       <p class="past-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
       <p class="past-stay-card-info" aria-label="room type">Room Type: ${booking.roomType}</p>
@@ -118,7 +115,6 @@ let dom = {
       </section>`
 
       currentContainer.innerHTML += cardContent
-
     })
   } else {
     dom.addClass(currentContainer, "no-rooms")
@@ -134,7 +130,7 @@ let dom = {
         let convertBidet = dom.converToYorN(booking.bidet)
         let cardContent = 
         `<section aria-label="booking from ${booking.date}" class="booking-card"> 
-        ${dom.findRandom()}
+        ${dom.findRoomPic(booking.roomType)}
         <p class="future-stay-card-info" aria-label="date of stay">Date: ${booking.date}</p>
         <p class="future-stay-card-info" aria-label="room number">Room Number: ${booking.roomNumber}</p>
         <p class="future-stay-card-info" aria-label="room type">Room Type: ${booking.roomType}</p>
@@ -154,6 +150,7 @@ let dom = {
   },
 
   getUserPreferences() {
+    dom.removeClass(availableRoomsContainer, "no-rooms-preferences")
     let chooseDate = document.getElementById('start').value
     let formattedChooseDate = dayjs(chooseDate).format('YYYY/MM/DD')
     let roomType = document.getElementById('roomType').value
@@ -179,7 +176,7 @@ let dom = {
         let currentCard = document.createElement('section')
         let cardContent = 
         `<section aria-label="booking from ${booking.date}" class="booking-card-new" id=" ${booking.number}"> 
-        ${dom.findRandom()}
+        ${dom.findRoomPic(booking.roomType)}
         <p class="available-room-card" aria-label="date of stay">Date: ${chooseDate}</p>
         <p class="available-room-card" aria-label="room number">Room Number: ${booking.number}</p>
         <p class="available-room-card" aria-label="room type">Room Type: ${booking.roomType}</p>
@@ -197,7 +194,6 @@ let dom = {
       let content = `<section><p class="no-room-text" aria-label="No Rooms"> No rooms available for your date or preferences. Stop being so picky and try again!</p></section>`
       availableRoomsContainer.innerHTML += content
     }
-
   }, 
 
   postValidation(data, e) {
@@ -207,7 +203,6 @@ let dom = {
     } else {
       targetBtn.closest("button").innerText = "Did not work. Try again later"}
   },
-
 
   bookRoom(e) {
     let targetBtn = e.target
@@ -232,25 +227,6 @@ let dom = {
       .catch(err => console.log(err))
   },
 
-  getCustomerNumber(userGeneratedName) {
-    let getUserNumber = userGeneratedName.split("")
-    
-    let returnNumber = getUserNumber.filter(character => {
-     return character === "1" ||
-     character === "2" ||
-     character === "3" ||
-     character === "4" ||
-     character === "5" ||
-     character === "6" ||
-     character === "7" ||
-     character === "8" ||
-     character === "9" ||
-     character === "0"
-    })
-
-    return Number(returnNumber.join(""))
-  },
-
   convertToBoolean(value) {
     if(value === "true") {
       return true
@@ -267,9 +243,16 @@ let dom = {
     }
   },
 
-
-  findRandom() {
-    return roomPics[Math.floor(Math.random() * roomPics.length)]
+  findRoomPic(roomType) {
+    if(roomType === "single room") {
+      return roomPics[0]
+    } else if(roomType === "junior suite") {
+      return roomPics[1]
+    } else if(roomType === "suite") {
+      return roomPics[2]
+    } else if(roomType === "residential suite") {
+      return roomPics[3]
+    }
   }
 
 }
