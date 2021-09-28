@@ -13,40 +13,40 @@ describe('Bookings', () => {
       "bedSize": "queen",
       "numBeds": 1,
       "costPerNight": 358.4
-  },
-  {
+    },
+    {
       "number": 2,
       "roomType": "suite",
       "bidet": false,
       "bedSize": "full",
       "numBeds": 2,
       "costPerNight": 477.38
-  },
-  {
+    },
+    {
       "number": 3,
       "roomType": "single room",
       "bidet": false,
       "bedSize": "king",
       "numBeds": 1,
       "costPerNight": 491.14
-  },
-  {
+    },
+    {
       "number": 4,
       "roomType": "single room",
       "bidet": false,
       "bedSize": "queen",
       "numBeds": 1,
       "costPerNight": 429.44
-  },
-  {
+    },
+    {
       "number": 5,
       "roomType": "single room",
       "bidet": true,
       "bedSize": "queen",
       "numBeds": 2,
       "costPerNight": 340.17
-  },
-  {
+    },
+    {
       "number": 6,
       "roomType": "junior suite",
       "bidet": true,
@@ -92,32 +92,32 @@ describe('Bookings', () => {
 
   it('should display only rooms that are associated with the customerID', () => {
     expect(booking.getOnlyCustomer(21, rooms)).to.deep.equal([
-        {
-          "id": "5fwrgu4i7k55hl6sz",
-          "userID": 21,
-          "date": "2020/01/16",
-          "roomNumber": 1,
-          "roomServiceCharges": [],
-          "roomType": "residential suite",
-          "bidet": true,
-          "bedSize": "queen",
-          "numBeds": 1,
-          "costPerNight": 358.4
-        },
-        {
-          "id": "5fwrgu4i7k55hl6t6",
-          "userID": 21,
-          "date": "2020/02/16",
-          "roomNumber": 3,
-          "roomServiceCharges": [],
-          "roomType": "single room",
-          "bidet": false,
-          "bedSize": "king",
-          "numBeds": 1,
-          "costPerNight": 491.14
-        }
-      ])
-    })
+      {
+        "id": "5fwrgu4i7k55hl6sz",
+        "userID": 21,
+        "date": "2020/01/16",
+        "roomNumber": 1,
+        "roomServiceCharges": [],
+        "roomType": "residential suite",
+        "bidet": true,
+        "bedSize": "queen",
+        "numBeds": 1,
+        "costPerNight": 358.4
+      },
+      {
+        "id": "5fwrgu4i7k55hl6t6",
+        "userID": 21,
+        "date": "2020/02/16",
+        "roomNumber": 3,
+        "roomServiceCharges": [],
+        "roomType": "single room",
+        "bidet": false,
+        "bedSize": "king",
+        "numBeds": 1,
+        "costPerNight": 491.14
+      }
+    ])
+  })
 
   it('should return customer past bookings', () => { 
     booking.getOnlyCustomer(21, rooms)
