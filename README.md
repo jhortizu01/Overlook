@@ -5,6 +5,7 @@ Mod2 Final Project
 
 ## Table of Contents
   - [Abstract](#abstract)
+  - [Deployed Link](#deployed)
   - [Technologies](#technologies)
   - [Illustrations](#illustrations)
   - [Features](#features)
@@ -13,7 +14,12 @@ Mod2 Final Project
   - [Project Specs](#project-specs)
 
 ## Abstract
-	The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
+The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
+
+## Deployed Link
+To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details. Password is <code>overlook2021</code>
+
+[Click here to see it live!](https://ecstatic-bhabha-e8b952.netlify.app)
 
 ## Technologies
   - Javascript
@@ -21,14 +27,14 @@ Mod2 Final Project
   - SCSS/CSS
   - DayJS
   - API Fetchcalls
-	- Mocha 
-	- Chai 
+  - Mocha 
+  - Chai 
 
 ## Illustrations
 
 Login Page:
 
-![Picture of Overlook Home page](https://user-images.githubusercontent.com/21073095/135017998-58069718-264a-4dd9-ac17-bb9a6b4b52e1.png")
+![Picture of Overlook login page](https://user-images.githubusercontent.com/21073095/135022272-00f3dc07-751b-4fe1-be0c-8c2cb91b71f9.png)
 
 Booking Page:
 
@@ -42,7 +48,6 @@ Past Trips Page:
 
 Some fun features the website has includes:
 
-  - To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details.
   - User can filter by several different preferences: date, room type, if it has a bidet, bed size and number of beds.
   - If there are no available rooms to book or the user doesn't have any past, present or future rooms coming up a message will be displayed to book a room. 
   - The amount the user spends on the top right corner updates as they book rooms. This is so that the user can keep track of how much they have spent in bookings.
@@ -57,7 +62,7 @@ Some fun features the website has includes:
   - In your browser go to <code>http://localhost:8080/</code>
 
 ## Contributors
-  - [Janika Hortizuela](https://github.com/jhortizu01)
+[Janika Hortizuela](https://github.com/jhortizu01)
 
 ## Project Specs
-  - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/overlook.html)
+The project spec & rubric can be found [here](https://frontend.turing.edu/projects/overlook.html)
