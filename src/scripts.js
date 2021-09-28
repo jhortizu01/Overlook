@@ -134,7 +134,6 @@ availableRoomsContainer.addEventListener('click', (e) => {
   dom.bookRoom(e)
 })
 
-
 submitCreds.addEventListener('click', (e) => {
   logInToPage(e)
 })

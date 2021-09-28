@@ -119,6 +119,7 @@ button {
 }
 
 .booking-container {
+  pointer-events: none;
  display: flex;
 @include takeUpSpace(100%);
 }
@@ -140,7 +141,8 @@ button {
   margin-right: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  height: 400px
+  height: 400px;
+  pointer-events: auto;
 }
 
 label {
@@ -176,16 +178,21 @@ margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  pointer-events: auto;
 }
 
 .booking-card-new {
   height: 600px;
+  pointer-events: none;
 }
 
 .submit {
   margin-top: 25px;
 }
 
+.book-new-stay {
+  pointer-events: auto;
+}
 .no-rooms {
   font-size: 100px;
   display: flex;
