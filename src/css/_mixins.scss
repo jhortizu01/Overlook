@@ -1,6 +1,6 @@
 @mixin takeUpSpace($number) {
-  height: $number;
-  width: $number;
+  height: $number vh;
+  width: $number vw;
 }
 
 @mixin flexStyle() {
