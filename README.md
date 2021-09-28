@@ -17,7 +17,7 @@ Mod2 Final Project
 The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
 
 ## Deployed Link
-To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details.
+To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details. Password is <code>overlook2021</code>
 
 [Click here to see it live!](https://ecstatic-bhabha-e8b952.netlify.app)
 
