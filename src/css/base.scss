@@ -193,6 +193,11 @@ margin-bottom: 20px;
 .book-new-stay {
   pointer-events: auto;
 }
+
+.booked{
+  pointer-events: none;
+}
+
 .no-rooms {
   font-size: 100px;
   display: flex;
