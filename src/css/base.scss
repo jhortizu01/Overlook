@@ -110,7 +110,8 @@ nav {
 
 .overlook-image {
   align-items: center;
-  @include takeUpSpace(80%)
+  height: 70%;
+  width: 90%;
 }
 
 .hidden {
