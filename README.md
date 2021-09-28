@@ -13,7 +13,7 @@ Mod2 Final Project
   - [Project Specs](#project-specs)
 
 ## Abstract
-	The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
+The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
 
 ## Technologies
   - Javascript
@@ -21,8 +21,8 @@ Mod2 Final Project
   - SCSS/CSS
   - DayJS
   - API Fetchcalls
-	- Mocha 
-	- Chai 
+  - Mocha 
+  - Chai 
 
 ## Illustrations
 
@@ -57,7 +57,7 @@ Some fun features the website has includes:
   - In your browser go to <code>http://localhost:8080/</code>
 
 ## Contributors
-  - [Janika Hortizuela](https://github.com/jhortizu01)
+[Janika Hortizuela](https://github.com/jhortizu01)
 
 ## Project Specs
-  - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/overlook.html)
+The project spec & rubric can be found [here](https://frontend.turing.edu/projects/overlook.html)
