@@ -17,6 +17,7 @@ Mod2 Final Project
 The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
 
 ## Deployed Link
+To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details.
 
 [Click here to see it live!](https://ecstatic-bhabha-e8b952.netlify.app)
 
@@ -47,7 +48,6 @@ Past Trips Page:
 
 Some fun features the website has includes:
 
-  - To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details.
   - User can filter by several different preferences: date, room type, if it has a bidet, bed size and number of beds.
   - If there are no available rooms to book or the user doesn't have any past, present or future rooms coming up a message will be displayed to book a room. 
   - The amount the user spends on the top right corner updates as they book rooms. This is so that the user can keep track of how much they have spent in bookings.
