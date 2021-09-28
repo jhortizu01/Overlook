@@ -77,6 +77,7 @@ let dom = {
   },
 
   displayPastBookings(){
+    dom.removeClass(pastContainer, "no-rooms")
     bookings.pastCustomerBookings.map(booking => {
       let pastCard = document.createElement('section')
       pastCard.cassList = 'past-card'
@@ -98,6 +99,7 @@ let dom = {
   },
 
   displayCurrentBookings() {
+    dom.removeClass(currentContainer, "no-rooms")
     if(bookings.currentCustomerBookings.length > 0){
     bookings.currentCustomerBookings.map(booking => {
       let currentCard = document.createElement('section')
@@ -124,6 +126,7 @@ let dom = {
 },
 
   displayFutureBookings() {
+    dom.removeClass(futureContainer, "no-rooms")
     if(bookings.futureCustomerBookings.length > 0){
       bookings.futureCustomerBookings.map(booking => {
         let currentCard = document.createElement('section')
@@ -207,6 +210,7 @@ let dom = {
   bookRoom(e) {
     let targetBtn = e.target
     let roomNum = Number(targetBtn.closest('.booking-card-new').id)
+    dom.addClass(targetBtn, "booked")
     let chooseDate = document.getElementById('start').value
     let formattedChooseDate = dayjs(chooseDate).format('YYYY/MM/DD')
 
