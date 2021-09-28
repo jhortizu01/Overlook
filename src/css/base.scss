@@ -81,18 +81,18 @@ nav {
   height: 100%;
 }
 
-  button {
-    font-family: $main-font;
-    background-color: black;
-    border: none;
-    color: white;
-    height: 50px;
-    width: 120px;
-    margin-right: 10px;
-    margin-top: 15px;
-    border-radius: $border-radius;
-    box-shadow: $shadow;
-  }
+button {
+  font-family: $main-font;
+  background-color: black;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 120px;
+  margin-right: 10px;
+  margin-top: 15px;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+}
 
 .home-container {
   @include takeUpSpace(100%);
