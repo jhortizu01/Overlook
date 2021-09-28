@@ -154,7 +154,7 @@ margin-bottom: 20px;
 .past-container,
 .current-container,
 .future-container {
-  @include takeUpSpace(100%);
+  @include takeUpSpace(100);
   @include flexStyle();
 }
 
@@ -189,15 +189,16 @@ margin-bottom: 20px;
   font-size: 100px;
   display: flex;
   background-image: url("../images/sad.png");
-  background-position-x: 60px;
+  background-position-x: 150px;
   background-repeat: no-repeat;
   justify-content: flex-end;
+  height: 500px;
 }
 
 .no-room-text {
   margin-top: 25px;
   text-align: right;
-  margin-right: 65px;
+  margin-right: 150px;
 }
 
 p {
