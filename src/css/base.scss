@@ -6,6 +6,12 @@ html {
   width: 100vw;
 }
 
+body {
+  background: $primary-color;
+  margin: 0px;
+  @include takeUpSpace(100%);
+}
+
 .login-labels {
   display: flex;
 }
@@ -69,12 +75,6 @@ html {
   margin-bottom: 0px;
 }
 
-body {
-  background: $primary-color;
-  margin: 0px;
-  @include takeUpSpace(100%);
-}
-
 nav {
   display: flex;
   justify-content: center;
@@ -120,14 +120,21 @@ button {
 
 .booking-container {
   pointer-events: none;
- display: flex;
-@include takeUpSpace(100%);
+  display: flex;
+  @include takeUpSpace(100%);
 }
 
 .available-rooms-container {
   @include takeUpSpace(100%);
   @include flexStyle();
-  height: 100vh;
+  margin-left: 0px;
+}
+
+.past-container,
+.current-container,
+.future-container {
+  @include takeUpSpace(100%);
+  @include flexStyle();
 }
 
 .booking-selection {
@@ -136,13 +143,17 @@ button {
   border: solid black 3px;
   border-radius: $border-radius;
   width: 20%;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 60px;
-  margin-right: 20px;
+  margin-right: 0px;
   padding-left: 20px;
   padding-right: 20px;
   height: 400px;
   pointer-events: auto;
+}
+
+.submit {
+  margin-top: 25px;
 }
 
 label {
@@ -154,13 +165,6 @@ text-align: center;
 margin-bottom: 20px;
 }
 
-.past-container,
-.current-container,
-.future-container {
-  @include takeUpSpace(100);
-  @include flexStyle();
-}
-
 .card-image-current { 
   margin-top: 10px;
   height: 50%;
@@ -170,7 +174,7 @@ margin-bottom: 20px;
 .booking-card,
 .booking-card-new {
   height: 520px;
-  width: 300px;
+  width: 350px;
   border: black solid 3px;
   margin: 20px;
   font-family: $main-font;
@@ -184,10 +188,6 @@ margin-bottom: 20px;
 .booking-card-new {
   height: 600px;
   pointer-events: none;
-}
-
-.submit {
-  margin-top: 25px;
 }
 
 .book-new-stay {
