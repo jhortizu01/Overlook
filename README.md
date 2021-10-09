@@ -5,7 +5,6 @@ Mod2 Final Project
 
 ## Table of Contents
   - [Abstract](#abstract)
-  - [Deployed Link](#deployed)
   - [Technologies](#technologies)
   - [Illustrations](#illustrations)
   - [Features](#features)
@@ -15,11 +14,6 @@ Mod2 Final Project
 
 ## Abstract
 The Overlook is an app that shows users past,present and future bookings for their hotel stay. Users can also book a room with their specified date and preferences. 
-
-## Deployed Link
-To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details. Password is <code>overlook2021</code>
-
-[Click here to see it live!](https://ecstatic-bhabha-e8b952.netlify.app)
 
 ## Technologies
   - Javascript
@@ -60,6 +54,7 @@ Some fun features the website has includes:
   - In a new terminal, run <code>npm install</code>
   - Run <code>npm start</code>
   - In your browser go to <code>http://localhost:8080/</code>
+  - To login, the user will type in <code>customer</code> with any number from 1-50. Each number represents a specific user with their own specific details. Password is <code>overlook2021</code>
 
 ## Contributors
 [Janika Hortizuela](https://github.com/jhortizu01)
